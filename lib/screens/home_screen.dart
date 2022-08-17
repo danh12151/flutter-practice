@@ -82,9 +82,14 @@ Card _foodCard(BuildContext context, Food food) {
             children: [
               IconButton(
                   onPressed: () {
-                    context.read<FoodBloc>().add(DeleteFoodEvent(food));
+                    context.read<FoodBloc>().add(DeleteFoodEvent(food: food));
                   },
                   icon: const Icon(Icons.delete)),
+              IconButton(
+                  onPressed: (){
+                    // code handle edit update
+                  },
+                  icon: const Icon(Icons.edit))
             ],
           )
         ],

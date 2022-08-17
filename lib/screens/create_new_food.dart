@@ -50,7 +50,7 @@ class _CreateNewFoodState extends State<CreateNewFood> {
                           _descriptionTextEditingController.value.text,
                           double.parse(_priceTextEditingController.value.text)
                       );
-                      context.read<FoodBloc>().add(AddFoodEvent(food));
+                      context.read<FoodBloc>().add(AddFoodEvent(food: food));
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(primary: Theme

@@ -11,6 +11,7 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     on<LoadFoodEvent>(_onLoadFood);
     on<AddFoodEvent>(_onAddFood);
     on<DeleteFoodEvent>(_onDeleteFood);
+    on<EditFoodEvent>(_onEditFood);
 
   }
 
@@ -26,7 +27,20 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   void _onDeleteFood(DeleteFoodEvent event, Emitter<FoodState> emit){
     final state = this.state;
     if (state is FoodLoaded){
+      // get the foodList from state
+      // go for each element and take only the element(food)
+      // just return the list (from loaded state) without the food item from delete event
       List<Food> foodList =  state.foodList.where((food) => food.id != event.food.id).toList();
+      emit(FoodLoaded(foodList: foodList));
+    }
+  }
+
+  void _onEditFood(EditFoodEvent event, Emitter<FoodState> emit){
+    final state = this.state;
+
+    if (state is FoodLoaded){
+      List<Food> foodList = state.foodList.map(
+              (food) => food.id == event.food.id ? event.food : food).toList();
       emit(FoodLoaded(foodList: foodList));
     }
   }

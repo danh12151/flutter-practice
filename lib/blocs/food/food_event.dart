@@ -21,7 +21,7 @@ class LoadFoodEvent extends FoodEvent{
 class AddFoodEvent extends FoodEvent{
   final Food food;
 
-  const AddFoodEvent(this.food);
+  const AddFoodEvent({required this.food});
   @override
   List<Object?> get props => [food];
 }
@@ -29,7 +29,17 @@ class AddFoodEvent extends FoodEvent{
 class DeleteFoodEvent extends FoodEvent{
   final Food food;
 
-  const DeleteFoodEvent(this.food);
+  const DeleteFoodEvent({required this.food});
+  @override
+  List<Object?> get props => [food];
+}
+
+class EditFoodEvent extends FoodEvent{
+  final Food food;
+
+
+  const EditFoodEvent({required this.food});
+
   @override
   List<Object?> get props => [food];
 }
