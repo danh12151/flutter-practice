@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_practice/blocs/food/food_bloc.dart';
 import 'package:flutter_practice/models/food.dart';
+import 'package:flutter_practice/screens/create_new_food.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                //handle add food?
+                //handle add food
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (builder) => CreateNewFood())
+                );
               },
               icon: const Icon(Icons.add)),
         ],
@@ -45,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: state.foodList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return _foodCard(state.foodList[index]);
+                      return _foodCard(context, state.foodList[index]);
                     },
 
                   )
@@ -62,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Card _foodCard(Food food) {
+Card _foodCard(BuildContext context, Food food) {
   return Card(
     margin: const EdgeInsets.only(bottom: 8.0),
     child: Padding(
@@ -77,7 +82,7 @@ Card _foodCard(Food food) {
             children: [
               IconButton(
                   onPressed: () {
-                    //handle
+                    context.read<FoodBloc>().add(DeleteFoodEvent(food));
                   },
                   icon: const Icon(Icons.delete)),
             ],

@@ -12,7 +12,6 @@ class FoodLoading extends FoodState {
 
 }
 
-
 class FoodLoaded extends FoodState {
   //
   final List<Food> foodList;

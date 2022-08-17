@@ -22,10 +22,14 @@ class AddFoodEvent extends FoodEvent{
   final Food food;
 
   const AddFoodEvent(this.food);
+  @override
+  List<Object?> get props => [food];
 }
 
 class DeleteFoodEvent extends FoodEvent{
   final Food food;
 
   const DeleteFoodEvent(this.food);
+  @override
+  List<Object?> get props => [food];
 }

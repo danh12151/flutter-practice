@@ -1,9 +1,7 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_practice/models/food.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 part 'food_event.dart';
 part 'food_state.dart';
@@ -11,12 +9,8 @@ part 'food_state.dart';
 class FoodBloc extends Bloc<FoodEvent, FoodState> {
   FoodBloc() : super(FoodLoading()) {
     on<LoadFoodEvent>(_onLoadFood);
-    on<AddFoodEvent>((event, emit) {
-
-    });
-    on<DeleteFoodEvent>((event, emit) {
-
-    });
+    on<AddFoodEvent>(_onAddFood);
+    on<DeleteFoodEvent>(_onDeleteFood);
 
   }
 
@@ -29,7 +23,11 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
       emit(FoodLoaded(foodList: List.from(state.foodList)..add(event.food) ));
     }
   }
-  void _onDeleteFood(DeleteFoodEvent event, Emitter<FoodState> emitter){
-
+  void _onDeleteFood(DeleteFoodEvent event, Emitter<FoodState> emit){
+    final state = this.state;
+    if (state is FoodLoaded){
+      List<Food> foodList =  state.foodList.where((food) => food.id != event.food.id).toList();
+      emit(FoodLoaded(foodList: foodList));
+    }
   }
 }

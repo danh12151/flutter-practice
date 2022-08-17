@@ -10,6 +10,5 @@ class Food extends Equatable{
   const Food(this.id, this.name, this.description, this.price);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id,name,description,price];
 }
