@@ -12,7 +12,6 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     on<AddFoodEvent>(_onAddFood);
     on<DeleteFoodEvent>(_onDeleteFood);
     on<EditFoodEvent>(_onEditFood);
-
   }
 
   void _onLoadFood(LoadFoodEvent event, Emitter<FoodState> emit){
